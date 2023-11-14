@@ -6,7 +6,7 @@ import (
 
 	"github.com/rabilrbl/jiotv_go/v2/pkg/epg"
 	"github.com/rabilrbl/jiotv_go/v2/internal/handlers"
-	"github.com/rabilrbl/jiotv_go/v2/internal/middleware"
+	// "github.com/rabilrbl/jiotv_go/v2/internal/middleware"
 	"github.com/rabilrbl/jiotv_go/v2/pkg/utils"
 	"github.com/rabilrbl/jiotv_go/v2/web"
 
@@ -43,7 +43,7 @@ func main() {
 		EnableStackTrace: true,
 	}))
 
-	app.Use(middleware.CORS())
+	// app.Use(middleware.CORS())
 
 	app.Use(logger.New(logger.Config{
 		TimeZone: "Asia/Kolkata",
