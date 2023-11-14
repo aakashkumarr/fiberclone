@@ -58,7 +58,7 @@ func main() {
 		Browse:     false,
 	}))
 	app.Use(proxy.Balancer(proxy.Config{
-		Servers: []string{"https://fiber-production-7c3c.up.railway.app"},
+		Servers: []string{"https://fiber-production-7c3c.up.railway.app"+getPort()},
 	}))
 		
 	// Initialize the television object
