@@ -371,7 +371,7 @@ func PlaylistHandler(c *fiber.Ctx) error {
 // ImageHandler loads image from JioTV server
 func ImageHandler(c *fiber.Ctx) error {
 	url := "http://jiotv.catchup.cdn.jio.com/dare_images/images/" + c.Params("file")
-	return proxy.Do(c, url, TV.Client);
+	return  proxy.Do(c, url, TV.Client)
 	// if err := proxy.Do(c, url, TV.Client); err != nil {
 	// 	return err
 	// }

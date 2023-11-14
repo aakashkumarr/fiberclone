@@ -15,6 +15,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/html/v2"
+	"github.com/gofiber/fiber/v2/middleware/proxy"
 )
 
 func main() {
@@ -56,7 +57,10 @@ func main() {
 		PathPrefix: "static",
 		Browse:     false,
 	}))
-
+	app.Use(proxy.Balancer(proxy.Config{
+		Servers: []string{"https://fiber-production-7c3c.up.railway.app"},
+	}))
+		
 	// Initialize the television object
 	handlers.Init()
 
@@ -85,18 +89,16 @@ func main() {
 	// }
 	
 
-	err := app.Listen(getPort())
+	err := app.Listen(":" + getPort())
 	if err != nil {
 		utils.Log.Fatal(err)
 	}
 }
 func getPort() string {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = ":3000"
-	} else {
-		port = ":" + port
-	}
-
-	return port
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "3000"
+    }
+    return port
 }
+
