@@ -78,14 +78,25 @@ func main() {
 	app.Get("/jtvimage/:file", handlers.ImageHandler)
 	app.Get("/epg.xml.gz", handlers.EPGHandler)
 
-	addr := "localhost:5001"
+	// addr := "localhost:5001"
 
-	if len(os.Args) > 1 {
-		addr = os.Args[1]
-	}
+	// if len(os.Args) > 1 {
+	// 	addr = os.Args[1]
+	// }
+	
 
-	err := app.Listen(addr)
+	err := app.Listen(getPort())
 	if err != nil {
 		utils.Log.Fatal(err)
 	}
+}
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":3000"
+	} else {
+		port = ":" + port
+	}
+
+	return port
 }
